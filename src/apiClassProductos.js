@@ -39,7 +39,7 @@ export default class ApiProductos {
         title: title,
         description: description,
         price: price,
-        timestamp: dateNow(),
+        timestamp: 132,
         code: code,
         stock: stock,
         thumbnail: thumbnail
@@ -60,7 +60,7 @@ export default class ApiProductos {
         id: idAsignado,
         title: objeto.title,
         price: objeto.price,
-        timestamp: dateNow(),
+        timestamp: 123,
         description: objeto.description,
         code: objeto.code,
         stock: objeto.stock,

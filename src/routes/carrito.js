@@ -42,8 +42,8 @@ router.post('/:id/productos', adminOrClient, async (req, res)=>{
 })
 
 router.delete('/:id/productos/:id_prod', adminOrClient, async (req, res)=>{
-    const {id1, id2}= req.params;
-    const xCart = await cart.delProductOfCart(id1, id2)
+    const {id, id_prod}= req.params;
+    const xCart = await cart.delProductOfCart(id, id_prod)
     res.json(xCart)
 })
 

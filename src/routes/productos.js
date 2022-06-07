@@ -13,7 +13,7 @@ function adminOrClient(req, res, next) {
     next();
   }
 }
-
+// en esta ruta no me permite renderizar
 router.get("/", adminOrClient, async (req, res) => {
   let productsIndex = await products.findAll();
 

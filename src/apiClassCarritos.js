@@ -1,12 +1,12 @@
 import fs from "fs";
 export default class ApiCarrito {
-    constructor(rutaBDCart) {
-        this.rutaBDCart = __dirname + rutaBDCart;
-    }
-    // getNow = () => {
-    //     const now = new Date();
-    //     return `${now.getHours()}:${now.getMinutes()}`;
-    //   };
+  constructor(rutaBDCart) {
+    this.rutaBDCart = __dirname + rutaBDCart;
+  }
+  // getNow = () => {
+  //     const now = new Date();
+  //     return `${now.getHours()}:${now.getMinutes()}`;
+  //   };
 
   async leer() {
     const data = await fs.promises.readFile(this.rutaBDCart, "utf-8");
@@ -60,12 +60,11 @@ export default class ApiCarrito {
       let objetoEliminar = informacion.filter(
         (informacion) => informacion.id != idEliminar
       );
-      console.log(objetoEliminar)
+      console.log(objetoEliminar);
       await fs.promises.writeFile(
         this.rutaBDCart,
         `${JSON.stringify(objetoEliminar)}`
       );
-      //   console.log(objetoEliminar)
       return objetoEliminar;
     } catch (error) {
       console.log("error", error);
@@ -75,7 +74,7 @@ export default class ApiCarrito {
     try {
       let carrito = await this.findbyId(id);
       let contiene = carrito.products.map((producto) => producto.title);
-      return console.log(`contiene los productos: ${contiene}`);
+      return `contiene los productos: ${contiene}`;
     } catch (error) {
       console.log("error", error);
     }
@@ -83,13 +82,18 @@ export default class ApiCarrito {
   async productAddToCart(obj, id) {
     try {
       let cartSearch = await this.findbyId(id);
-      console.log(cartSearch)
+
       cartSearch.products.push(obj);
-      console.log(cartSearch)
-      let newCart = await this.findAll()
-      console.log(newCart)
-      await fs.promises.writeFile(this.rutaBDCart, `${JSON.stringify(newCart)}`);
-      return cartSearch;
+
+      await this.deleteById(id);
+      let newCart = await this.findAll();
+      newCart.push(cartSearch);
+
+      await fs.promises.writeFile(
+        this.rutaBDCart,
+        `${JSON.stringify(newCart)}`
+      );
+      return `Productos agregados con exito`;
     } catch (error) {
       console.log("error", error);
     }
@@ -97,12 +101,17 @@ export default class ApiCarrito {
   async delProductOfCart(id1, id2) {
     try {
       let cartSearch = await this.findbyId(id1);
-      let productCart = cartSearch.products.filter((e) => e.id !== id2);
+      console.log(cartSearch);
+      cartSearch.products = cartSearch.products.filter((e) => e.id != id2);
+      await this.deleteById(id1);
+      let newCart = await this.findAll();
+      newCart.push(cartSearch);
+      console.log(newCart);
       await fs.promises.writeFile(
         this.rutaBDCart,
-        `${JSON.stringify(productCart)}`
+        `${JSON.stringify(newCart)}`
       );
-      return "eliminado cone exito";
+      return "eliminado con exito";
     } catch (error) {
       console.log("error", error);
     }
