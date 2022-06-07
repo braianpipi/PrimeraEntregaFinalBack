@@ -1,1 +1,1 @@
-[]
+[{"id":1,"timestamp":123,"products":[{"id":1,"title":"Mono Lentes","price":2,"thumbnail":"https://cloudfront-us-east-1.images.arcpublishing.com/infobae/H7W2IQYTJENYXPNKIGA6WE2DYA.jpg"},{"id":2,"title":"Mono Dorado","price":4,"thumbnail":"https://cloudfront-us-east-1.images.arcpublishing.com/infobae/KA6QZAPJ73GKRERDDS4S552AIE.jpg"}]},{"id":2,"timestamp":132,"products":[]},{"id":3,"timestamp":132,"products":[]},{"id":4,"timestamp":132,"products":[]},{"id":5,"timestamp":132,"products":[]}]

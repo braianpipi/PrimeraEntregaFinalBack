@@ -9,19 +9,22 @@
 //     b. POST : '/'- Para incorporar productos al listado (disponible para administradores)
 //     c. PUT : '/:id'-Actualiza un producto por su id(disponible para administradores)
 //     d. DELETE : '/:id'- Borra un producto por su id(disponible para administradores)
-
 import express from 'express'
 import morgan from 'morgan'
 import routesPruducts from './routes/productos'
 import routesCart from './routes/carrito'
+
 const app = express()
 
-app.use(express.json())
-app.use(morgan('dev'))
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname+'/public'))
 
 app.use('/productos', routesPruducts)
 app.use('/carrito', routesCart)
-
+app.set("views", "./views");
+app.set("view engine", "ejs");
 
 const PORT = 8080
 app.listen(PORT, ()=>{
